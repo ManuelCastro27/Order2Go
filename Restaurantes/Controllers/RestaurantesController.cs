@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Restaurantes.Data;
 using Restaurantes.Models;
 
 namespace Restaurantes.Controller
 {
-    public class RestaurantesController : Controller
+    public class RestaurantesController : Controllers
     {
         private readonly ApplicationDbContext _context;
 
@@ -23,6 +22,11 @@ namespace Restaurantes.Controller
         public async Task<IActionResult> Index()
         {
             return View(await _context.Restaurante.ToListAsync());
+        }
+
+        private IActionResult View(List<Restaurante> restaurantes)
+        {
+            throw new NotImplementedException();
         }
 
         // GET: Restaurantes/Details/5
@@ -41,6 +45,11 @@ namespace Restaurantes.Controller
             }
 
             return View(restaurante);
+        }
+
+        private IActionResult NotFound()
+        {
+            throw new NotImplementedException();
         }
 
         // GET: Restaurantes/Create
