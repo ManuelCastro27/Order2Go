@@ -18,11 +18,26 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Restaurante</a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Listado", "Index", "Restaurantes")</li>
+                                <li>@Html.ActionLink("Nuevo Restaurante", "Create", "Restaurantes")</li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Productos</a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Listado", "Index", "Productos")</li>
+                                <li>@Html.ActionLink("Nuevo Producto", "Create", "Productos")</li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ventas</a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Listado", "Index", "Ventas")</li>
+                                <li>@Html.ActionLink("Nueva Venta", "Create", "Ventas")</li>
+                            </ul>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
