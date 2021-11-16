@@ -20,10 +20,10 @@ namespace Order2Go.Models
         [Display(Name = "Decripción")]
         public string Descripcion { get; set; }
 
-        [DataType(DataType.PhoneNumber)]
+        //[DataType(DataType.PhoneNumber)]
         [Required(ErrorMessage = "El {0} es requerido.")]
         [StringLength(8, ErrorMessage = "El {0} debe tener un maximo de {1} caracteres.")]
-        public int Telefono { get; set; }
+        public string Telefono { get; set; }
 
         public virtual ICollection<Producto> Productos { get; set; }
 

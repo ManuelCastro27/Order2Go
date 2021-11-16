@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -43,6 +44,7 @@ namespace Order2Go.Controllers
             return View(restaurante);
         }
 
+        //[Authorize(Roles = "Admin")]
         // GET: Restaurantes/Create
         public IActionResult Create()
         {
@@ -65,6 +67,7 @@ namespace Order2Go.Controllers
             return View(restaurante);
         }
 
+        //[Authorize(Roles = "Admin")]
         // GET: Restaurantes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

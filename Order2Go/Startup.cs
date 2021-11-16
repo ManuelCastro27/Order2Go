@@ -33,12 +33,13 @@ namespace Order2Go
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider services)
         {
             if (env.IsDevelopment())
             {
@@ -66,6 +67,28 @@ namespace Order2Go
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+            CreateRoles(services).Wait();
+        }
+
+        private async Task CreateRoles(IServiceProvider serviceProvider)
+        {
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+            IdentityResult roleResult;
+
+            var roleCheck = await RoleManager.RoleExistsAsync("Admin");
+            if (!roleCheck)
+            {
+                //here in this line we are creating admin role and seed it to the database
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("Admin"));
+            }
+            //here we are assigning the Admin role to the User that we have registered above 
+            //Now, we are assinging admin role to this user("Ali@gmail.com"). When will we run this project then it will
+            //be assigned to that user.
+            IdentityUser user = await UserManager.FindByEmailAsync("manuel.castro@uned.cr");
+            var User = new IdentityUser();
+            await UserManager.AddToRoleAsync(user, "Admin");
         }
     }
 }
